@@ -87,7 +87,21 @@
   from {
     transform: translateY(0);}
   to {
-    transform: translateY(calc(-100% - var(--gap)));}}}
+    transform: translateY(calc(-100% - var(--gap)));}}
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+  @keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);}}
+  @keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);}
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);}
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);}
+  100% {
+    transform: translateZ(0) rotate(360deg);}}}
 
 :root {
   --radius: 0.625rem;
@@ -175,4 +189,88 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes float-1 {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(100px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(200px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-2 {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(150px) rotate(90deg);
+  }
+  100% {
+    transform: translateX(300px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-3 {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(80px) rotate(45deg);
+  }
+  100% {
+    transform: translateX(250px) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+.animate-float-1 {
+  animation: float-1 15s linear infinite;
+}
+
+.animate-float-2 {
+  animation: float-2 20s linear infinite;
+}
+
+.animate-float-3 {
+  animation: float-3 25s linear infinite;
+}
+
+@keyframes move-row-1 {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes move-row-2 {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes move-row-3 {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.animate-row-1 {
+  animation: move-row-1 40s linear infinite;
+}
+
+.animate-row-2 {
+  animation: move-row-2 50s linear infinite;
+}
+
+.animate-row-3 {
+  animation: move-row-3 45s linear infinite;
+}
+
+.edu-icon {
+  opacity: 0.15;
+  display: inline-block;
+  margin: 0 30px;
 }
