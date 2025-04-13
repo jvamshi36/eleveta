@@ -1,15 +1,8 @@
-# netlify.toml
-
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
 
-# Optional: Redirects for Next.js routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Optional: Remove or comment out this plugin to prevent build errors
-#[[plugins]]
-#  package = "@netlify/plugin-nextjs"
