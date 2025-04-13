@@ -35,6 +35,9 @@ import { TextRevealCard } from "@/components/magicui/text-reveal-card";
 import { BackgroundBeams } from "@/components/magicui/background-beams";
 import { Label } from "@/components/ui/label";
 import { Confetti } from "@/components/magicui/confetti";
+import { ConfettiFireworks } from "@/components/magicui/confetti";
+
+import confetti from 'canvas-confetti';
 
 const ExcelTutoringWebsite = () => {
   const CardDescription = ({ children }: { children: React.ReactNode }) => (
@@ -56,38 +59,101 @@ const ExcelTutoringWebsite = () => {
   const [demoButtonText, setDemoButtonText] = useState('Book Free Demo');
 
   // Form submission handlers
+  // Add this state near other state declarations
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  
+  // Update the form handlers
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
-
-    // Change button text and show confetti
-    setContactButtonText('Submitted');
-    setShowConfetti(true);
-
+    
+    // Trigger confetti
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+  
+    const randomInRange = (min: number, max: number) =>
+      Math.random() * (max - min) + min;
+  
+    const interval = window.setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+  
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+  
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+  
+    // Show snackbar
+    setSnackbarMessage('Message sent successfully!');
+    setShowSnackbar(true);
+  
+    // Hide snackbar after 3 seconds
+    setTimeout(() => {
+      setShowSnackbar(false);
+    }, 3000);
+  
     // Reset form
     e.currentTarget.reset();
-
-    // Stop confetti after 3 seconds
-    setTimeout(() => {
-      setShowConfetti(false);
-    }, 3000);
   };
 
   const handleDemoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
 
-    // Change button text and show confetti
+    // Change button text
     setDemoButtonText('Submitted');
-    setShowConfetti(true);
 
+    // Trigger confetti
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+  
+    const randomInRange = (min: number, max: number) =>
+      Math.random() * (max - min) + min;
+  
+    const interval = window.setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+  
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+  
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+
+    // Show snackbar
+    setSnackbarMessage('Demo class scheduled successfully!');
+    setShowSnackbar(true);
+  
+    // Hide snackbar after 3 seconds
+    setTimeout(() => {
+      setShowSnackbar(false);
+    }, 3000);
+  
     // Reset form
     e.currentTarget.reset();
-
-    // Stop confetti after 3 seconds
-    setTimeout(() => {
-      setShowConfetti(false);
-    }, 3000);
   };
    
     
@@ -778,13 +844,8 @@ const ExcelTutoringWebsite = () => {
                           </label>
                         </div>
                         <div className="flex justify-center relative">
-                          {showConfetti && (
-                            <div className="absolute inset-0 pointer-events-none z-50">
-                              <Confetti />
-                            </div>
-                          )}
                           <ShimmerButton type="submit">
-                            {contactButtonText} <ArrowRight size={18} className="ml-2" />
+                          Send Message <ArrowRight size={18} className="ml-2" />
                           </ShimmerButton>
                         </div>
                       </form>
@@ -872,13 +933,8 @@ const ExcelTutoringWebsite = () => {
                           </label>
                         </div>
                         <div className="flex justify-center relative">
-                          {showConfetti && (
-                            <div className="absolute inset-0 pointer-events-none z-50">
-                              <Confetti />
-                            </div>
-                          )}
                           <ShimmerButton type="submit">
-                            {demoButtonText}
+                          Book Free Demo
                           </ShimmerButton>
                         </div>
                       </form>
@@ -941,7 +997,12 @@ const ExcelTutoringWebsite = () => {
           </div>
         </div>
       </footer>
-          </div>
+      {showSnackbar && (
+        <div className="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-[9999] animate-in fade-in slide-in-from-bottom-4">
+          {snackbarMessage}
+        </div>
+      )}
+    </div>
       );
     };
     export default ExcelTutoringWebsite;
