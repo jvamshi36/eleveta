@@ -34,6 +34,7 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { TextRevealCard } from "@/components/magicui/text-reveal-card";
 import { BackgroundBeams } from "@/components/magicui/background-beams";
 import { Label } from "@/components/ui/label";
+import { Confetti } from "@/components/magicui/confetti";
 
 const ExcelTutoringWebsite = () => {
   const CardDescription = ({ children }: { children: React.ReactNode }) => (
@@ -45,6 +46,52 @@ const ExcelTutoringWebsite = () => {
   const fromRef1 = useRef(null);
   const fromRef2 = useRef(null);
   const toRef = useRef(null);
+  
+  // Add state for form submission and snackbar
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  
+  // Add state for button text
+  const [contactButtonText, setContactButtonText] = useState('Send Message');
+  const [demoButtonText, setDemoButtonText] = useState('Book Free Demo');
+
+  // Form submission handlers
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle form submission logic here
+
+    // Change button text and show confetti
+    setContactButtonText('Submitted');
+    setShowConfetti(true);
+
+    // Reset form
+    e.currentTarget.reset();
+
+    // Stop confetti after 3 seconds
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 3000);
+  };
+
+  const handleDemoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle form submission logic here
+
+    // Change button text and show confetti
+    setDemoButtonText('Submitted');
+    setShowConfetti(true);
+
+    // Reset form
+    e.currentTarget.reset();
+
+    // Stop confetti after 3 seconds
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 3000);
+  };
+   
+    
+       
   
   useEffect(() => {
     const handleScroll = () => {
@@ -679,6 +726,7 @@ const ExcelTutoringWebsite = () => {
                         method="POST"
                         data-netlify="true"
                         className="space-y-6"
+                        onSubmit={handleContactSubmit}
                       >
                         <input type="hidden" name="form-name" value="contact-form" />
                         <div className="grid md:grid-cols-2 gap-6">
@@ -729,9 +777,16 @@ const ExcelTutoringWebsite = () => {
                             I agree to the <a href="#privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
                           </label>
                         </div>
-                        <InteractiveHoverButton type="submit" className="w-full">
-                          Send Message
-                        </InteractiveHoverButton>
+                        <div className="flex justify-center relative">
+                          {showConfetti && (
+                            <div className="absolute inset-0 pointer-events-none z-50">
+                              <Confetti />
+                            </div>
+                          )}
+                          <ShimmerButton type="submit">
+                            {contactButtonText} <ArrowRight size={18} className="ml-2" />
+                          </ShimmerButton>
+                        </div>
                       </form>
                     </TabsContent>
                     
@@ -741,6 +796,7 @@ const ExcelTutoringWebsite = () => {
                         method="POST"
                         data-netlify="true"
                         className="space-y-6"
+                        onSubmit={handleDemoSubmit}
                       >
                         <input type="hidden" name="form-name" value="demo-form" />
                         <div className="grid md:grid-cols-2 gap-6">
@@ -815,9 +871,16 @@ const ExcelTutoringWebsite = () => {
                             I agree to the <a href="#privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
                           </label>
                         </div>
-                        <ShimmerButton type="submit" className="w-full">
-                          Book Free Demo
-                        </ShimmerButton>
+                        <div className="flex justify-center relative">
+                          {showConfetti && (
+                            <div className="absolute inset-0 pointer-events-none z-50">
+                              <Confetti />
+                            </div>
+                          )}
+                          <ShimmerButton type="submit">
+                            {demoButtonText}
+                          </ShimmerButton>
+                        </div>
                       </form>
                     </TabsContent>
                   </Tabs>
@@ -878,10 +941,11 @@ const ExcelTutoringWebsite = () => {
           </div>
         </div>
       </footer>
-      </div>
-  );
-}
-export default ExcelTutoringWebsite;
-   
-    
-       
+          </div>
+      );
+    };
+    export default ExcelTutoringWebsite;
+
+
+
+
