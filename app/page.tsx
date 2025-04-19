@@ -214,42 +214,42 @@ const demoForm = useRef<HTMLFormElement>(null);
       name: "Sarah Johnson",
       username: "AP Calculus Student",
       body: "My tutor helped me go from struggling with calculus to scoring a 5 on my AP exam. The personalized approach made all the difference.",
-      img: "/api/placeholder/40/40",
+      img: "/11475221.jpg",
       rating: 5
     },
     {
       name: "Michael Chen",
       username: "College Freshman",
       body: "The interactive sessions and resources available 24/7 helped me ace my college entrance exams. I couldn't have done it without Excel Tutoring!",
-      img: "/api/placeholder/40/40",
+      img: "/11475221.jpg",
       rating: 5
     },
     {
       name: "Jessica Miller",
       username: "High School Senior",
       body: "The progress tracking feature helped me identify my weak points and turn them into strengths. My SAT score improved by over 200 points.",
-      img: "/api/placeholder/40/40",
+      img: "/11475221.jpg",
       rating: 4
     },
     {
       name: "David Thompson",
       username: "Graduate Student",
       body: "As a working professional pursuing a master's degree, I needed flexible tutoring. Excel Tutoring delivered exactly what I needed.",
-      img: "/api/placeholder/40/40",
+      img: "/11475221.jpg",
       rating: 5
     },
     {
       name: "Emma Rodriguez",
       username: "Parent",
       body: "My daughter's confidence in math has grown tremendously since working with tutors on this platform. Worth every penny!",
-      img: "/api/placeholder/40/40",
+      img: "/11475221.jpg",
       rating: 5
     },
     {
       name: "Alex Wu",
       username: "International Student",
       body: "The tutors helped me not only with subject material but also with language barriers. My academic performance improved significantly.",
-      img: "/api/placeholder/40/40",
+      img: "/11475221.jpg",
       rating: 5
     },
   ];
@@ -372,7 +372,7 @@ const demoForm = useRef<HTMLFormElement>(null);
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-div   {/* Navigation */}
+  {/* Navigation */}
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled 
