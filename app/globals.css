@@ -4,6 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-1: 222 89% 60%;   /* e.g., #3B82F6 */
+  --color-2: 265 80% 70%;
+  --color-3: 192 76% 60%;
+  --color-4: 340 82% 65%;
+  --color-5: 48 100% 60%;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -101,7 +106,17 @@
   65%, 85% {
     transform: translateZ(0) rotate(270deg);}
   100% {
-    transform: translateZ(0) rotate(360deg);}}}
+    transform: translateZ(0) rotate(360deg);}}
+  @keyframes rainbow {
+  0% {
+    background-position: 0%;}
+  100% {
+    background-position: 200%;}}
+  @keyframes rainbow {
+  0% {
+    background-position: 0%;}
+  100% {
+    background-position: 200%;}}}
 
 :root {
   --radius: 0.625rem;

@@ -1,7 +1,6 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import emailjs from '@emailjs/browser';
 import { 
   Star, ChevronRight, Atom, ArrowRight, Menu, X, Sparkles, Shield, 
   BarChart, Heart, FileCheck, Clock, Laptop, MessageCircle, BookOpen, 
@@ -15,7 +14,6 @@ import {
   Palette 
 } from 'lucide-react';
 import { motion, useScroll, useInView } from "framer-motion";
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,15 +29,18 @@ import { Globe } from "@/components/magicui/globe";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
 import { ScrollReveal } from "@/components/magicui/scroll-reveal";
 import { MagicCard } from "@/components/magicui/magic-card";
-import { TextRevealCard } from "@/components/magicui/text-reveal-card";
 import { BackgroundBeams } from "@/components/magicui/background-beams";
 import { Label } from "@/components/ui/label";
-import { Confetti } from "@/components/magicui/confetti";
-import { ConfettiFireworks } from "@/components/magicui/confetti";
 
 import confetti from 'canvas-confetti';
 
 const ExcelTutoringWebsite = () => {
+  const SERVICE_ID_1 = 'service_fcslvkd';
+  const SERVICE_ID_2 = 'service_o5k0hwm';
+const CONTACT_TEMPLATE_ID = 'template_n4vv6k6';
+const DEMO_TEMPLATE_ID = 'template_q37l0eg';
+const PUBLIC_KEY_1 = 'JlUh1ACXZLdvuPqS7';
+const PUBLIC_KEY_2 = 'abDzcm7NmMpWuk-5H';
 
   const CardDescription = ({ children }: { children: React.ReactNode }) => (
     <p className="text-sm text-muted-foreground">{children}</p>
@@ -63,11 +64,24 @@ const ExcelTutoringWebsite = () => {
   // Add this state near other state declarations
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  
+  const [submitting, setSubmitting] = useState(false);
+  const contactForm = useRef<HTMLFormElement>(null);
+const demoForm = useRef<HTMLFormElement>(null);
   // Update the form handlers
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
+    emailjs.sendForm(SERVICE_ID_1, CONTACT_TEMPLATE_ID, contactForm.current!, PUBLIC_KEY_1)
+      .then((result) => {
+        console.log('Contact form sent:', result.text);
+        alert('Your message has been sent successfully!');
+        contactForm.current?.reset();
+      })
+      .catch((error) => {
+        console.error('Contact form error:', error.text);
+        alert('There was an error sending your message. Please try again.');
+      });
+    setSubmitting(true);
     // Trigger confetti
     const duration = 5 * 1000;
     const animationEnd = Date.now() + duration;
@@ -107,10 +121,26 @@ const ExcelTutoringWebsite = () => {
   
     // Reset form
     e.currentTarget.reset();
+    setSubmitting(false);
   };
 
   const handleDemoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitting(true);
+
+   if (!demoForm.current) return;
+
+   emailjs
+    .sendForm(SERVICE_ID_2, DEMO_TEMPLATE_ID, demoForm.current, PUBLIC_KEY_2)
+    .then((result) => {
+      console.log("Demo form sent:", result.text);
+      alert("Your demo session has been successfully booked!");
+      demoForm.current?.reset();
+    })
+    .catch((error) => {
+      console.error("Demo form error:", error.text);
+      alert("There was an error booking your demo. Please try again.");
+    });
     // Handle form submission logic here
 
     // Change button text
@@ -155,6 +185,7 @@ const ExcelTutoringWebsite = () => {
   
     // Reset form
     e.currentTarget.reset();
+    setSubmitting(false);
   };
   useEffect(() => {
     const handleScroll = () => 
@@ -339,11 +370,6 @@ const ExcelTutoringWebsite = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission
-  };
-
   return (
     <div className="min-h-screen bg-white text-gray-900">
 div   {/* Navigation */}
@@ -360,9 +386,15 @@ div   {/* Navigation */}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="flex items-center">
-            <div className="text-2xl font-bold">
-              <span className="text-blue-600">Eleveta</span>
-            </div>
+<AuroraText 
+  className="block text-3xl font-bold tracking-tight font-poppins" 
+  colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
+  speed={0.5}
+>
+  Eleveta
+</AuroraText>
+
+
           </motion.div>
         
           {/* Desktop Navigation */}
@@ -377,17 +409,19 @@ div   {/* Navigation */}
             <a href="#testimonials" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Testimonials</a>
             <a href="#contact" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
             <RainbowButton 
-              className="bg-blue-600/70 backdrop-blur-sm text-white hover:bg-blue-700/80 shadow-md"
-              onClick={() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => {
-                  const demoTab = document.querySelector('[value="demo"]') as HTMLElement;
-                  if (demoTab) demoTab.click();
-                }, 100);
-              }}
-            >
-              Book Now
-            </RainbowButton>
+                  className="flex-1 text-white bg-blue-600/70 backdrop-blur-sm shadow-md"
+                  onClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                      const demoTab = document.querySelector('[value="demo"]') as HTMLElement;
+                      if (demoTab) demoTab.click();
+                    }, 100);
+                    setMobileMenuOpen(false); // Close mobile menu after clicking
+                  }}
+                >
+                  Book Now
+                </RainbowButton>
+
           </motion.nav>
           
           {/* Mobile menu button */}
@@ -508,7 +542,7 @@ div   {/* Navigation */}
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-32">
+          <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32">
               <Globe
                 className="w-full h-full"
                 config={{
@@ -547,53 +581,60 @@ div   {/* Navigation */}
                 learning style. We believe that with the right guidance, every student has
                 the potential to excel academically.
               </p>
-              <div className="flex flex-wrap gap-8 mt-8">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  className="flex items-center gap-3">
-                  <BookOpen className="text-blue-600 h-8 w-8" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Certified Teachers</div>
-                    <div className="text-gray-500 text-sm">Experienced educators</div>
-                  </div>
-                </motion.div>
-                </div>
-                <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="flex items-center gap-3">
-                  <GraduationCap className="text-orange-500 h-8 w-8" />
-                  <div>
-                    <div className="font-semibold text-gray-900">IIT Mentors</div>
-                    <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
-                  </div>
-                  </motion.div>
-                <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="flex items-center gap-3">
-                  <Clock className="text-purple-500 h-8 w-8" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Proven methodology</div>
-                    <div className="text-gray-500 text-sm">Recognized excellence</div>
-                  </div>
-                  </motion.div>
-                <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              className="flex items-center gap-3">
-                  <Award className="text-green-600 h-8 w-8" />
-                  <div>
-                    <div className="font-semibold text-gray-900">Award-Winning</div>
-                    <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
-                  </div>
-                </motion.div>
-            </ScrollReveal>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 justify-items-center sm:justify-items-start text-center sm:text-left">
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+    className="flex items-center gap-3 max-w-xs"
+  >
+    <BookOpen className="text-blue-600 h-8 w-8" />
+    <div>
+      <div className="font-semibold text-gray-900">Certified Teachers</div>
+      <div className="text-gray-500 text-sm">Experienced educators</div>
+    </div>
+  </motion.div>
+
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+    className="flex items-center gap-3 max-w-xs"
+  >
+    <GraduationCap className="text-orange-500 h-8 w-8" />
+    <div>
+      <div className="font-semibold text-gray-900">IIT Mentors</div>
+      <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
+    </div>
+  </motion.div>
+
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+    className="flex items-center gap-3 max-w-xs"
+  >
+    <Clock className="text-purple-500 h-8 w-8" />
+    <div>
+      <div className="font-semibold text-gray-900">Proven Methodology</div>
+      <div className="text-gray-500 text-sm">Recognized excellence</div>
+    </div>
+  </motion.div>
+
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+    className="flex items-center gap-3 max-w-xs"
+  >
+    <Award className="text-green-600 h-8 w-8" />
+    <div>
+      <div className="font-semibold text-gray-900">Award-Winning</div>
+      <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
+    </div>
+  </motion.div>
+</div>
+</ScrollReveal>
           </div>
         </div>
       </section>
@@ -874,181 +915,162 @@ div   {/* Navigation */}
                         <TabsTrigger value="demo">Schedule a Demo Class</TabsTrigger>
                       </TabsList>
                     </motion.div>
-                    <TabsContent value="contact" className="p-6">
-                      <motion.form
-                        name="contact-form"
-                        method="POST"
-                        data-netlify="true"
-                        className="space-y-6"
-                        onSubmit={handleContactSubmit}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <input type="hidden" name="form-name" value="contact-form" />
-                        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, staggerChildren: 0.1 }}
-            className="grid md:grid-cols-2 gap-6">
-                          <div className="grid gap-2">
-                            <Label htmlFor="name">Full Name</Label>
-                            <Input id="name" name="name" placeholder="John Doe" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor="email">Email Address</Label>
-                            <Input id="email" name="email" type="email" placeholder="john@example.com" />
-                          </div>
-                        </motion.div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="subject">Inquiry</Label>
-                          <select
-                            id="subject"
-                            name="subject"
-                            className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            defaultValue=""
-                          >
-                            <motion.option value="" disabled>Select an Inquiry</motion.option>
-                            <motion.option value="general">General Inquiry</motion.option>
-                            <motion.option value="tutoring">Tutoring Services</motion.option>
-                            <motion.option value="pricing">Pricing Information</motion.option>
-                            <motion.option value="support">Technical Support</motion.option>
-                            <motion.option value="other">Other</motion.option>
-                          </select>
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="message">Message</Label>
-                          <textarea
-                            id="message"
-                            name="message"
-                            rows={5}
-                            className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Tell us more about your academic needs..."
-                          ></textarea>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            id="privacy"
-                            name="privacy"
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                            required
-                          />
-                          <label htmlFor="privacy" className="text-sm text-gray-600">
-                            I agree to the <a href="#privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
-                          </label>
-                        </div>
-                        <div className="flex justify-center relative">
-                          <ShimmerButton type="submit">
-                          Send Message <ArrowRight size={18} className="ml-2" />
-                          </ShimmerButton>
-                        </div>
-                      </motion.form>
-                    </TabsContent>
-                    
-                    <TabsContent value="demo" className="p-6">
-                      <motion.form
-                        name="demo-form"
-                        method="POST"
-                        data-netlify="true"
-                        className="space-y-6"
-                        onSubmit={handleDemoSubmit}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <input type="hidden" name="form-name" value="demo-form" />
-                        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, staggerChildren: 0.1 }}
-            className="grid md:grid-cols-2 gap-6">
-                          <div className="grid gap-2">
-                            <Label htmlFor="demo-name">Full Name</Label>
-                            <Input id="demo-name" name="name" placeholder="John Doe" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor="demo-email">Email Address</Label>
-                            <Input id="demo-email" name="email" type="email" placeholder="john@example.com" />
-                          </div>
-                        </motion.div>
-                        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, staggerChildren: 0.1 }}
-            className="grid md:grid-cols-2 gap-6">
-                          <div className="grid gap-2">
-                            <Label htmlFor="demo-phone">Phone Number</Label>
-                            <Input id="demo-phone" name="phone" type="tel" placeholder="(123) 456-7890" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor="demo-subject">Subject of Interest</Label>
-                            <select
-                              id="demo-subject"
-                              name="subject"
-                              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              defaultValue=""
-                            >
-                              <motion.option value="" disabled>Select a subject</motion.option>
-                              <motion.option value="math">Mathematics</motion.option>
-                              <motion.option value="science">Sciences</motion.option>
-                              <motion.option value="test-prep">Test Preparation</motion.option>
-                            </select>
-                          </div>
-                        </motion.div>
-                        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, staggerChildren: 0.1 }}
-            className="grid md:grid-cols-2 gap-6">
-                          <div className="grid gap-2">
-                            <Label htmlFor="preferred-date">Preferred Date</Label>
-                            <Input id="preferred-date" name="date" type="date" />
-                          </div>
-                          <div className="grid gap-2">
-                            <Label htmlFor="preferred-time">Preferred Time</Label>
-                            <select
-                              id="preferred-time"
-                              name="time"
-                              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              defaultValue=""
-                            >
-                              <option value="" disabled>Select a time</option>
-                              <option value="morning">Morning (9AM - 12PM)</option>
-                              <option value="afternoon">Afternoon (12PM - 4PM)</option>
-                              <option value="evening">Evening (4PM - 8PM)</option>
-                            </select>
-                          </div>
-                        </ motion.div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="demo-notes">Additional Notes</Label>
-                          <textarea
-                            id="demo-notes"
-                            name="notes"
-                            rows={3}
-                            className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Tell us about your learning goals or any specific areas you'd like to focus on..."
-                          ></textarea>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            id="demo-privacy"
-                            name="privacy"
-                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                            required
-                          />
-                          <label htmlFor="demo-privacy" className="text-sm text-gray-600">
-                            I agree to the <a href="#privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
-                          </label>
-                        </div>
-                        <div className="flex justify-center relative">
-                          <ShimmerButton type="submit">
-                          Book Free Demo
-                          </ShimmerButton>
-                        </div>
-                      </motion.form>
-                    </TabsContent>
+
+  <TabsContent value="contact" className="p-6">
+        <form ref={contactForm} onSubmit={handleContactSubmit} className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="name">Full Name</Label>
+              <Input id="name" name="name" placeholder="John Doe" required />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email Address</Label>
+              <Input id="email" name="email" type="email" placeholder="john@example.com" required />
+            </div>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="subject">Inquiry</Label>
+            <select
+              id="subject"
+              name="subject"
+              required
+              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue=""
+            >
+              <option value="" disabled>Select an Inquiry</option>
+              <option value="general">General Inquiry</option>
+              <option value="tutoring">Tutoring Services</option>
+              <option value="pricing">Pricing Information</option>
+              <option value="support">Technical Support</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="message">Message</Label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              required
+              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Tell us more about your academic needs..."
+            ></textarea>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="privacy"
+              name="privacy"
+              required
+              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            />
+            <label htmlFor="privacy" className="text-sm text-gray-600">
+              I agree to the <a href="#privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
+            </label>
+          </div>
+
+          <div className="flex justify-center relative">
+          <ShimmerButton type="submit" disabled={submitting}>
+  {submitting ? "Sending..." : <>Send Message <ArrowRight size={18} className="ml-2" /></>}
+</ShimmerButton>
+
+          </div>
+        </form>
+      </TabsContent>
+
+      {/* Demo Form */}
+      <TabsContent value="demo" className="p-6">
+        <form ref={demoForm} onSubmit={handleDemoSubmit} className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="demo-name">Full Name</Label>
+              <Input id="demo-name" name="name" placeholder="John Doe" required />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="demo-email">Email Address</Label>
+              <Input id="demo-email" name="email" type="email" placeholder="john@example.com" required />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="demo-phone">Phone Number</Label>
+              <Input id="demo-phone" name="phone" type="tel" placeholder="(123) 456-7890" required />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="demo-subject">Subject of Interest</Label>
+              <select
+                id="demo-subject"
+                name="subject"
+                required
+                className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue=""
+              >
+                <option value="" disabled>Select a subject</option>
+                <option value="math">Mathematics</option>
+                <option value="science">Sciences</option>
+                <option value="test-prep">Test Preparation</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="preferred-date">Preferred Date</Label>
+              <Input id="preferred-date" name="date" type="date" required />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="preferred-time">Preferred Time</Label>
+              <select
+                id="preferred-time"
+                name="time"
+                required
+                className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue=""
+              >
+                <option value="" disabled>Select a time</option>
+                <option value="morning">Morning (9AM - 12PM)</option>
+                <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                <option value="evening">Evening (4PM - 8PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="demo-notes">Additional Notes</Label>
+            <textarea
+              id="demo-notes"
+              name="notes"
+              rows={3}
+              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Tell us about your learning goals or any specific areas you'd like to focus on..."
+            ></textarea>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="demo-privacy"
+              name="privacy"
+              required
+              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            />
+            <label htmlFor="demo-privacy" className="text-sm text-gray-600">
+              I agree to the <a href="#privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
+            </label>
+          </div>
+
+          <div className="flex justify-center relative">
+          <ShimmerButton type="submit" disabled={submitting}>
+  {submitting ? "Sending..." : <>Send Message <ArrowRight size={18} className="ml-2" /></>}
+</ShimmerButton>
+          </div>
+        </form>
+      </TabsContent>
+
                   </Tabs>
                 </CardContent>
                 {/* Removed the shared CardFooter with the submit button */}
@@ -1062,9 +1084,13 @@ div   {/* Navigation */}
       <footer className="py-10 bg-white border-t border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div className="text-2xl font-bold mb-4 md:mb-0">
-              <span className="text-blue-600">Eleveta</span>
-            </div>
+          <AuroraText 
+  className="block text-3xl font-bold tracking-tight font-poppins" 
+  colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
+  speed={0.5}
+>
+  Eleveta
+</AuroraText>
             
             <div className="flex space-x-8">
               
