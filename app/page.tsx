@@ -40,6 +40,7 @@ import { ConfettiFireworks } from "@/components/magicui/confetti";
 import confetti from 'canvas-confetti';
 
 const ExcelTutoringWebsite = () => {
+
   const CardDescription = ({ children }: { children: React.ReactNode }) => (
     <p className="text-sm text-muted-foreground">{children}</p>
   );
@@ -155,12 +156,12 @@ const ExcelTutoringWebsite = () => {
     // Reset form
     e.currentTarget.reset();
   };
+  useEffect(() => {
+    const handleScroll = () => 
    
     
        
-  
-  useEffect(() => {
-    const handleScroll = () => {
+  {
       if (window.scrollY > 10) {
         setScrolled(true);
       } else {
@@ -175,6 +176,8 @@ const ExcelTutoringWebsite = () => {
     };
   }, []);
 
+
+  // Add smooth scroll behavior to all anchor li Johnson",
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -338,7 +341,7 @@ const ExcelTutoringWebsite = () => {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Navigation */}
+div   {/* Navigation */}
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled 
@@ -386,8 +389,13 @@ const ExcelTutoringWebsite = () => {
         
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 px-4 bg-white/50 backdrop-blur-xl border-t border-gray-200/30 shadow-sm">
-            <nav className="flex flex-col space-y-4">
+          <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+          className="md:hidden py-4 px-4 bg-white/50 backdrop-blur-xl border-t border-gray-200/30 shadow-sm"
+        > <nav className="flex flex-col space-y-4">
               <a href="#about" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">About Us</a>
               <a href="#services" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Services</a>
               <a href="#features" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Why Choose Us</a>
@@ -409,11 +417,11 @@ const ExcelTutoringWebsite = () => {
                 </RainbowButton>
               </div>
             </nav>
-          </div>
+          </motion.div>
         )}
       </header>
 
-      {/* Hero Section */}
+      {/* ddivn */}
       <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/70 to-gray-50">
         {/* Glow effect */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -440,7 +448,7 @@ const ExcelTutoringWebsite = () => {
           >
             <Badge variant="outline" className="border-blue-200 text-blue-600 py-1.5 px-4 mb-8 bg-blue-50">
               <Sparkles size={16} className="mr-2 text-orange-500" />
-              Transforming Education Since 2013
+              Innovating Education for a Better Future.
             </Badge>
           </motion.div>
           <motion.div 
@@ -455,13 +463,11 @@ const ExcelTutoringWebsite = () => {
                 colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
                 speed={0.5}
               >
-                Unlock Your Academic Potential
+                The IIT Advantage: Path to Academic Excellence.
               </AuroraText>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Personalized tutoring sessions designed to help you achieve academic 
-              excellence and build lasting confidence in your abilities.
-            </p>
+            Personalized tutoring sessions led by experienced instructors from India's premier IITs, designed to help you achieve academic excellence.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ShimmerButton onClick={() => {
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -519,11 +525,9 @@ const ExcelTutoringWebsite = () => {
             </ScrollReveal>
             
             <ScrollReveal className="lg:w-1/2" delay={0.2} direction="right">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">About Excel Tutoring</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">About Eleveta</h2>
               <p className="text-gray-600 mb-6">
-                With over 10 years of experience in education, Excel Tutoring was founded
-                with a simple mission: to help students achieve their academic goals
-                through personalized, high-quality tutoring services.
+              Founded with a clear mission: to empower students to achieve their academic goals through personalized, high-quality tutoring. Our instructors are experienced educators and subject matter experts, many from India's premier IITs, skilled in adapting their teaching to each student's unique learning style. We believe that with the right guidance from top minds, every student can excel.
               </p>
               <p className="text-gray-600 mb-6">
                 Our tutors are not only subject matter experts but also skilled educators
@@ -540,17 +544,24 @@ const ExcelTutoringWebsite = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Clock className="text-orange-500 h-8 w-8" />
+                  <GraduationCap className="text-orange-500 h-8 w-8" />
                   <div>
-                    <div className="font-semibold text-gray-900">10+ Years Experience</div>
-                    <div className="text-gray-500 text-sm">Proven methodology</div>
+                    <div className="font-semibold text-gray-900">IIT Mentors</div>
+                    <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock className="text-purple-500 h-8 w-8" />
+                  <div>
+                    <div className="font-semibold text-gray-900">Proven methodology</div>
+                    <div className="text-gray-500 text-sm">Recognized excellence</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Award className="text-green-600 h-8 w-8" />
                   <div>
                     <div className="font-semibold text-gray-900">Award-Winning</div>
-                    <div className="text-gray-500 text-sm">Recognized excellence</div>
+                    <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
                   </div>
                 </div>
               </div>
@@ -620,7 +631,7 @@ const ExcelTutoringWebsite = () => {
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Why Choose Excel Tutoring</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Why Choose Eleveta</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Discover all the ways our tutoring platform can help transform your learning experience and academic growth.
               </p>
@@ -683,6 +694,8 @@ const ExcelTutoringWebsite = () => {
           </div>
         </div>
       </section>
+        
+       
 
       {/* CTA Section with animated background elements */}
       <section className="py-20 bg-gray-50 relative overflow-hidden">
@@ -740,7 +753,7 @@ const ExcelTutoringWebsite = () => {
                     </div>
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-gray-900">Stop wasting time on studying.</h2>
                     <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                      Start your 7-day free trial today. No credit card required.
+                    Experience Excellence—Start Your Free Demo Class Now!
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mx-auto max-w-md">
                       <ShimmerButton onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto px-6 py-2.5 rounded-xl min-w-[180px] min-h-[48px] text-center">
@@ -806,14 +819,14 @@ const ExcelTutoringWebsite = () => {
                           </div>
                         </div>
                         <div className="grid gap-2">
-                          <Label htmlFor="subject">Subject</Label>
+                          <Label htmlFor="subject">Inquiry</Label>
                           <select
                             id="subject"
                             name="subject"
                             className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             defaultValue=""
                           >
-                            <option value="" disabled>Select a subject</option>
+                            <option value="" disabled>Select an Inquiry</option>
                             <option value="general">General Inquiry</option>
                             <option value="tutoring">Tutoring Services</option>
                             <option value="pricing">Pricing Information</option>
@@ -1006,7 +1019,3 @@ const ExcelTutoringWebsite = () => {
       );
     };
     export default ExcelTutoringWebsite;
-
-
-
-
