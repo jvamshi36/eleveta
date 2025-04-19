@@ -241,7 +241,12 @@ const ExcelTutoringWebsite = () => {
     rating = 5,
   }: TestimonialCardProps) => {
     return (
-      <figure className="relative h-full w-80 cursor-pointer overflow-hidden rounded-xl p-6 bg-gray-900 border border-gray-800 hover:border-gray-700 hover:bg-gray-800 transition-all">
+      <motion.figure 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        whileHover={{ scale: 1.02 }}
+        className="relative h-full w-80 cursor-pointer overflow-hidden rounded-xl p-6 bg-gray-900 border border-gray-800 hover:border-gray-700 hover:bg-gray-800 transition-all">
         <div className="flex flex-row items-center gap-3">
           <img className="rounded-full" width="48" height="48" alt={name} src={img} />
           <div className="flex flex-col">
@@ -266,7 +271,7 @@ const ExcelTutoringWebsite = () => {
         </div>
         
         <blockquote className="mt-3 text-gray-300 italic">"{body}"</blockquote>
-      </figure>
+      </motion.figure>
     );
   };
 
@@ -350,15 +355,22 @@ div   {/* Navigation */}
         }`}
       >
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center">
             <div className="text-2xl font-bold">
-              <span className="text-blue-600">Excel</span>
-              <span className="text-orange-500">Tutoring</span>
+              <span className="text-blue-600">Eleveta</span>
             </div>
-          </div>
+          </motion.div>
         
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <motion.nav 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="hidden md:flex items-center space-x-8">
           <a href="#about" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">About Us</a>
             <a href="#services" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Services</a>
             <a href="#features" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Why Choose Us</a>
@@ -376,7 +388,7 @@ div   {/* Navigation */}
             >
               Book Now
             </RainbowButton>
-          </nav>
+          </motion.nav>
           
           {/* Mobile menu button */}
           <button 
@@ -536,35 +548,51 @@ div   {/* Navigation */}
                 the potential to excel academically.
               </p>
               <div className="flex flex-wrap gap-8 mt-8">
-                <div className="flex items-center gap-3">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="flex items-center gap-3">
                   <BookOpen className="text-blue-600 h-8 w-8" />
                   <div>
                     <div className="font-semibold text-gray-900">Certified Teachers</div>
                     <div className="text-gray-500 text-sm">Experienced educators</div>
                   </div>
+                </motion.div>
                 </div>
-                <div className="flex items-center gap-3">
+                <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="flex items-center gap-3">
                   <GraduationCap className="text-orange-500 h-8 w-8" />
                   <div>
                     <div className="font-semibold text-gray-900">IIT Mentors</div>
                     <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3">
+                  </motion.div>
+                <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="flex items-center gap-3">
                   <Clock className="text-purple-500 h-8 w-8" />
                   <div>
                     <div className="font-semibold text-gray-900">Proven methodology</div>
                     <div className="text-gray-500 text-sm">Recognized excellence</div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3">
+                  </motion.div>
+                <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="flex items-center gap-3">
                   <Award className="text-green-600 h-8 w-8" />
                   <div>
                     <div className="font-semibold text-gray-900">Award-Winning</div>
                     <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
             </ScrollReveal>
           </div>
         </div>
@@ -583,7 +611,11 @@ div   {/* Navigation */}
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, staggerChildren: 0.2 }}
+            className="grid md:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <ScrollReveal key={index} delay={index * 0.1} direction={index % 2 === 0 ? "up" : "down"}>
                 <Card className="relative w-full overflow-hidden bg-white border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
@@ -622,43 +654,69 @@ div   {/* Navigation */}
                 </Card>
               </ScrollReveal>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <ScrollReveal>
-            <div className="text-center mb-16">
+      <section id="features" className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full md:w-3/4 md:h-3/4 rounded-full bg-blue-500/5 blur-3xl"></div>
+        </div>
+        <div className="relative z-10">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Why Choose Eleveta</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Discover all the ways our tutoring platform can help transform your learning experience and academic growth.
               </p>
-            </div>
-          </ScrollReveal>
+            </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="bg-white border border-gray-200 rounded-xl p-6 transition-all hover:border-blue-200 hover:shadow-lg">
-                  <div className="flex flex-col items-center text-center">
-                    {feature.icon}
-                    <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
-                    <p className="text-gray-600">{feature.description}</p>
+            <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, staggerChildren: 0.2 }}
+            className="grid md:grid-cols-3 gap-8">
+              {features.map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  <div className="bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl p-6 transition-all duration-300 hover:border-blue-200 hover:shadow-lg hover:-translate-y-1 group">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="transform transition-transform duration-300 group-hover:scale-110">
+                        {feature.icon}
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
                   </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-          
-          {/* Animated Beam Demo at the end of the section */}
-          <div className="relative mt-16 w-full flex justify-center">
-            <AnimatedBeam 
-              containerRef={containerRef}
-              fromRef={fromRef1}
-              toRef={toRef}
-            />
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="relative mt-16 w-full flex justify-center"
+            >
+              <AnimatedBeam 
+                containerRef={containerRef}
+                fromRef={fromRef1}
+                toRef={toRef}
+              />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -672,7 +730,7 @@ div   {/* Navigation */}
               <p className="text-blue-400 font-medium mb-2">Success Stories</p>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">What Our Students Say</h2>
               <p className="text-gray-300 max-w-2xl mx-auto">
-                Hear from students who have transformed their academic journey with Excel Tutoring.
+                Hear from students who have transformed their academic journey with Eleveta.
               </p>
             </div>
           </ScrollReveal>
@@ -773,14 +831,25 @@ div   {/* Navigation */}
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="container mx-auto px-4"
+        >
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-center mb-12"
+            >
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Get in Touch</h2>
               <p className="text-gray-600">
                 Have questions or ready to enhance your academic journey? Reach out to our team.
               </p>
-            </div>
+            </motion.div>
 
             <Card className="p-0 max-w-3xl w-full shadow-none border-none mx-auto">
               <MagicCard
@@ -795,20 +864,33 @@ div   {/* Navigation */}
                 </CardHeader>
                 <CardContent className="p-0">
                   <Tabs defaultValue="contact" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="contact">Get in Touch</TabsTrigger>
-                      <TabsTrigger value="demo">Schedule a Demo Class</TabsTrigger>
-                    </TabsList>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.4 }}
+                    >
+                      <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="contact">Get in Touch</TabsTrigger>
+                        <TabsTrigger value="demo">Schedule a Demo Class</TabsTrigger>
+                      </TabsList>
+                    </motion.div>
                     <TabsContent value="contact" className="p-6">
-                      <form
+                      <motion.form
                         name="contact-form"
                         method="POST"
                         data-netlify="true"
                         className="space-y-6"
                         onSubmit={handleContactSubmit}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <input type="hidden" name="form-name" value="contact-form" />
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.1 }}
+            className="grid md:grid-cols-2 gap-6">
                           <div className="grid gap-2">
                             <Label htmlFor="name">Full Name</Label>
                             <Input id="name" name="name" placeholder="John Doe" />
@@ -817,7 +899,7 @@ div   {/* Navigation */}
                             <Label htmlFor="email">Email Address</Label>
                             <Input id="email" name="email" type="email" placeholder="john@example.com" />
                           </div>
-                        </div>
+                        </motion.div>
                         <div className="grid gap-2">
                           <Label htmlFor="subject">Inquiry</Label>
                           <select
@@ -826,12 +908,12 @@ div   {/* Navigation */}
                             className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             defaultValue=""
                           >
-                            <option value="" disabled>Select an Inquiry</option>
-                            <option value="general">General Inquiry</option>
-                            <option value="tutoring">Tutoring Services</option>
-                            <option value="pricing">Pricing Information</option>
-                            <option value="support">Technical Support</option>
-                            <option value="other">Other</option>
+                            <motion.option value="" disabled>Select an Inquiry</motion.option>
+                            <motion.option value="general">General Inquiry</motion.option>
+                            <motion.option value="tutoring">Tutoring Services</motion.option>
+                            <motion.option value="pricing">Pricing Information</motion.option>
+                            <motion.option value="support">Technical Support</motion.option>
+                            <motion.option value="other">Other</motion.option>
                           </select>
                         </div>
                         <div className="grid gap-2">
@@ -861,19 +943,26 @@ div   {/* Navigation */}
                           Send Message <ArrowRight size={18} className="ml-2" />
                           </ShimmerButton>
                         </div>
-                      </form>
+                      </motion.form>
                     </TabsContent>
                     
                     <TabsContent value="demo" className="p-6">
-                      <form
+                      <motion.form
                         name="demo-form"
                         method="POST"
                         data-netlify="true"
                         className="space-y-6"
                         onSubmit={handleDemoSubmit}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
                       >
                         <input type="hidden" name="form-name" value="demo-form" />
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.1 }}
+            className="grid md:grid-cols-2 gap-6">
                           <div className="grid gap-2">
                             <Label htmlFor="demo-name">Full Name</Label>
                             <Input id="demo-name" name="name" placeholder="John Doe" />
@@ -882,8 +971,12 @@ div   {/* Navigation */}
                             <Label htmlFor="demo-email">Email Address</Label>
                             <Input id="demo-email" name="email" type="email" placeholder="john@example.com" />
                           </div>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        </motion.div>
+                        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.1 }}
+            className="grid md:grid-cols-2 gap-6">
                           <div className="grid gap-2">
                             <Label htmlFor="demo-phone">Phone Number</Label>
                             <Input id="demo-phone" name="phone" type="tel" placeholder="(123) 456-7890" />
@@ -896,14 +989,18 @@ div   {/* Navigation */}
                               className="w-full rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                               defaultValue=""
                             >
-                              <option value="" disabled>Select a subject</option>
-                              <option value="math">Mathematics</option>
-                              <option value="science">Sciences</option>
-                              <option value="test-prep">Test Preparation</option>
+                              <motion.option value="" disabled>Select a subject</motion.option>
+                              <motion.option value="math">Mathematics</motion.option>
+                              <motion.option value="science">Sciences</motion.option>
+                              <motion.option value="test-prep">Test Preparation</motion.option>
                             </select>
                           </div>
-                        </div>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        </motion.div>
+                        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.1 }}
+            className="grid md:grid-cols-2 gap-6">
                           <div className="grid gap-2">
                             <Label htmlFor="preferred-date">Preferred Date</Label>
                             <Input id="preferred-date" name="date" type="date" />
@@ -922,7 +1019,7 @@ div   {/* Navigation */}
                               <option value="evening">Evening (4PM - 8PM)</option>
                             </select>
                           </div>
-                        </div>
+                        </ motion.div>
                         <div className="grid gap-2">
                           <Label htmlFor="demo-notes">Additional Notes</Label>
                           <textarea
@@ -950,7 +1047,7 @@ div   {/* Navigation */}
                           Book Free Demo
                           </ShimmerButton>
                         </div>
-                      </form>
+                      </motion.form>
                     </TabsContent>
                   </Tabs>
                 </CardContent>
@@ -958,7 +1055,7 @@ div   {/* Navigation */}
               </MagicCard>
             </Card>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Footer */}
@@ -966,8 +1063,7 @@ div   {/* Navigation */}
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="text-2xl font-bold mb-4 md:mb-0">
-              <span className="text-blue-600">Excel</span>
-              <span className="text-orange-500">Tutoring</span>
+              <span className="text-blue-600">Eleveta</span>
             </div>
             
             <div className="flex space-x-8">
@@ -979,7 +1075,7 @@ div   {/* Navigation */}
               <a href="#contact" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
             </div>
             
-            <div className="flex space-x-4 mt-4 md:mt-0">
+            {/* <div className="flex space-x-4 mt-4 md:mt-0">
               {['twitter', 'facebook', 'instagram', 'linkedin'].map((social) => (
                 <a 
                   key={social} 
@@ -989,12 +1085,12 @@ div   {/* Navigation */}
                   <span className="sr-only">{social}</span>
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
           
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm">
-              © 2025 Excel Tutoring. All rights reserved.
+              © 2025 Eleveta. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#terms" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
