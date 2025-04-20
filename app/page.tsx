@@ -543,7 +543,7 @@ const demoForm = useRef<HTMLFormElement>(null);
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
           <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32">
-              <Globe
+              {/* <Globe
                 className="w-full h-full"
                 config={{
                   width: 800,
@@ -567,7 +567,7 @@ const demoForm = useRef<HTMLFormElement>(null);
                     { location: [35.6762, 139.6503], size: 0.1 },
                   ],
                 }}
-              />
+              /> */}
             </ScrollReveal>
             
             <ScrollReveal className="lg:w-1/2" delay={0.2} direction="right">
