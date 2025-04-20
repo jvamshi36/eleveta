@@ -542,7 +542,7 @@ const demoForm = useRef<HTMLFormElement>(null);
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-          <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32">
+          {/* <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32"> */}
               {/* <Globe
                 className="w-full h-full"
                 config={{
@@ -568,7 +568,7 @@ const demoForm = useRef<HTMLFormElement>(null);
                   ],
                 }}
               /> */}
-            </ScrollReveal>
+            {/* </ScrollReveal> */}
             
             <ScrollReveal className="lg:w-1/2" delay={0.2} direction="right">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">About Eleveta</h2>
