@@ -214,30 +214,30 @@ const demoForm = useRef<HTMLFormElement>(null);
   // Add smooth scroll behavior to all anchor li Johnson",
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Ishanth",
       username: "AP Calculus Student",
       body: "My tutor helped me go from struggling with calculus to scoring a 5 on my AP exam. The personalized approach made all the difference.",
       img: "/11475221.jpg",
       rating: 5
     },
     {
-      name: "Michael Chen",
+      name: "Lisa",
       username: "College Freshman",
-      body: "The interactive sessions and resources available 24/7 helped me ace my college entrance exams. I couldn't have done it without Excel Tutoring!",
+      body: "The interactive sessions and resources available 24/7 helped me ace my college entrance exams. I couldn't have done it without Eleveta!",
       img: "/11475221.jpg",
       rating: 5
     },
     {
-      name: "Jessica Miller",
-      username: "High School Senior",
+      name: "Jathin",
+      username: "High School",
       body: "The progress tracking feature helped me identify my weak points and turn them into strengths. My SAT score improved by over 200 points.",
       img: "/11475221.jpg",
       rating: 4
     },
     {
-      name: "David Thompson",
-      username: "Graduate Student",
-      body: "As a working professional pursuing a master's degree, I needed flexible tutoring. Excel Tutoring delivered exactly what I needed.",
+      name: "Nithisha",
+      username: "Elementary Student",
+      body: "I used to get confused with my homework after school. Eleveta helped me learn in a fun and easy way!",
       img: "/11475221.jpg",
       rating: 5
     },
@@ -246,10 +246,10 @@ const demoForm = useRef<HTMLFormElement>(null);
       username: "Parent",
       body: "My daughter's confidence in math has grown tremendously since working with tutors on this platform. Worth every penny!",
       img: "/11475221.jpg",
-      rating: 5
+      rating: 4
     },
     {
-      name: "Alex Wu",
+      name: "Aiden",
       username: "International Student",
       body: "The tutors helped me not only with subject material but also with language barriers. My academic performance improved significantly.",
       img: "/11475221.jpg",
@@ -578,77 +578,75 @@ const demoForm = useRef<HTMLFormElement>(null);
       <section id="about" className="py-16 bg-white">
   <div className="container mx-auto px-4">
     <div className="flex flex-col lg:flex-row items-center gap-12">
-      
       {/* Globe Section */}
-      <ScrollReveal className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:w-[800px] lg:h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-10 sm:-mt-20 md:-mt-24 lg:-mt-32 flex justify-center items-center">
-        {globeConfig && (
-          <Globe
-            className="w-full h-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-full"
-            config={globeConfig}
-          />
-        )}
-      </ScrollReveal>
+      <div className="lg:w-1/2 w-full">
+        <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px] relative rounded-xl bg-transparent overflow-visible flex justify-center items-center">
+          {globeConfig && (
+            <Globe
+              className="w-full h-full max-w-[320px] sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px] mx-auto"
+              config={globeConfig}
+            />
+          )}
+        </div>
+      </div>
 
       {/* Text and Features Section */}
-      <ScrollReveal className="lg:w-1/2 w-full text-center sm:text-left" delay={0.2} direction="right">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 text-center sm:text-left">
+      <div className="lg:w-1/2 w-full">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 text-center lg:text-left">
           About Eleveta
         </h2>
-        <p className="text-gray-600 mb-6 text-center sm:text-left">
+        <p className="text-gray-600 mb-6 text-center lg:text-left">
           Founded with a clear mission: to empower students to achieve their academic goals through personalized, high-quality tutoring. Our instructors are experienced educators and subject matter experts, many from India's premier IITs, skilled in adapting their teaching to each student's unique learning style. We believe that with the right guidance from top minds, every student can excel.
         </p>
-        <p className="text-gray-600 mb-6 text-center sm:text-left">
+        <p className="text-gray-600 mb-6 text-center lg:text-left">
           Our tutors are not only subject matter experts but also skilled educators who know how to adapt their teaching methods to fit each student's unique learning style. We believe that with the right guidance, every student has the potential to excel academically.
         </p>
-
+        
         {/* Feature Grid */}
-        <div className="flex justify-center">
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
-    {[
-      {
-        icon: <BookOpen className="text-blue-600 h-8 w-8" />,
-        title: "Certified Teachers",
-        subtitle: "Experienced educators",
-      },
-      {
-        icon: <GraduationCap className="text-orange-500 h-8 w-8" />,
-        title: "IIT Mentors",
-        subtitle: "Deep Subject Knowledge",
-      },
-      {
-        icon: <Clock className="text-purple-500 h-8 w-8" />,
-        title: "Proven Methodology",
-        subtitle: "Recognized excellence",
-      },
-      {
-        icon: <Award className="text-green-600 h-8 w-8" />,
-        title: "Award-Winning",
-        subtitle: "Effective Teaching",
-      },
-    ].map(({ icon, title, subtitle }, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -5, transition: { duration: 0.2 } }}
-        className="w-[200px] sm:w-full"
-      >
-        <div className="flex items-start gap-3 text-left">
-          <div className="mt-1">{icon}</div>
-          <div>
-            <div className="font-semibold text-gray-900">{title}</div>
-            <div className="text-gray-500 text-sm">{subtitle}</div>
+        <div className="mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {[
+              {
+                icon: <BookOpen className="text-blue-600 h-8 w-8" />,
+                title: "Certified Teachers",
+                subtitle: "Experienced educators",
+              },
+              {
+                icon: <GraduationCap className="text-orange-500 h-8 w-8" />,
+                title: "IIT Mentors",
+                subtitle: "Deep Subject Knowledge",
+              },
+              {
+                icon: <Clock className="text-purple-500 h-8 w-8" />,
+                title: "Proven Methodology",
+                subtitle: "Recognized excellence",
+              },
+              {
+                icon: <Award className="text-green-600 h-8 w-8" />,
+                title: "Award-Winning",
+                subtitle: "Effective Teaching",
+              },
+            ].map(({ icon, title, subtitle }, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="flex items-start gap-3"
+              >
+                <div className="mt-1 flex-shrink-0">{icon}</div>
+                <div>
+                  <div className="font-semibold text-gray-900">{title}</div>
+                  <div className="text-gray-500 text-sm">{subtitle}</div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </motion.div>
-          ))}
-        </div>
-        </div>
-      </ScrollReveal>
+      </div>
     </div>
   </div>
 </section>
-
       {/* Services Section */}
       <section id="services" className="py-20 bg-gray-50 border-t border-gray-100">
         <div className="container mx-auto px-4">
