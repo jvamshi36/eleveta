@@ -369,7 +369,34 @@ const demoForm = useRef<HTMLFormElement>(null);
     subject: '',
     message: ''
   });
-
+    const [globeConfig, setGlobeConfig] = useState<any>(null);
+  
+    useEffect(() => {
+      const isMobile = window.innerWidth < 768;
+  
+      setGlobeConfig({
+        width: isMobile ? 400 : 800,
+        height: isMobile ? 400 : 800,
+        devicePixelRatio: isMobile ? 1 : 2,
+        phi: 0,
+        theta: 0.3,
+        dark: 0,
+        diffuse: 0.4,
+        mapSamples: isMobile ? 8000 : 16000,
+        mapBrightness: 1.2,
+        baseColor: [1, 1, 1],
+        markerColor: [59 / 255, 130 / 255, 246 / 255],
+        glowColor: [1, 1, 1],
+        markers: [
+          { location: [40.7128, -74.006], size: 0.1 },
+          { location: [34.0522, -118.2437], size: 0.1 },
+          { location: [51.5074, -0.1278], size: 0.1 },
+          { location: [48.8566, 2.3522], size: 0.1 },
+          { location: [35.6762, 139.6503], size: 0.1 },
+        ],
+      });
+    }, []);
+  
   return (
     <div className="min-h-screen bg-white text-gray-900">
   {/* Navigation */}
@@ -540,105 +567,83 @@ const demoForm = useRef<HTMLFormElement>(null);
       
       {/* About Section */}
       <section id="about" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-          {/* <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32"> */}
-              {/* <Globe
-                className="w-full h-full"
-                config={{
-                  width: 800,
-                  height: 800,
-                  onRender: () => {},
-                  devicePixelRatio: 2,
-                  phi: 0,
-                  theta: 0.3,
-                  dark: 0,
-                  diffuse: 0.4,
-                  mapSamples: 16000,
-                  mapBrightness: 1.2,
-                  baseColor: [1, 1, 1],
-                  markerColor: [59 / 255, 130 / 255, 246 / 255],
-                  glowColor: [255 / 255, 255 / 255, 255 / 255],
-                  markers: [
-                    { location: [40.7128, -74.006], size: 0.1 },
-                    { location: [34.0522, -118.2437], size: 0.1 },
-                    { location: [51.5074, -0.1278], size: 0.1 },
-                    { location: [48.8566, 2.3522], size: 0.1 },
-                    { location: [35.6762, 139.6503], size: 0.1 },
-                  ],
-                }}
-              /> */}
-            {/* </ScrollReveal> */}
-            
-            <ScrollReveal className="lg:w-1/2" delay={0.2} direction="right">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">About Eleveta</h2>
-              <p className="text-gray-600 mb-6">
-              Founded with a clear mission: to empower students to achieve their academic goals through personalized, high-quality tutoring. Our instructors are experienced educators and subject matter experts, many from India's premier IITs, skilled in adapting their teaching to each student's unique learning style. We believe that with the right guidance from top minds, every student can excel.
-              </p>
-              <p className="text-gray-600 mb-6">
-                Our tutors are not only subject matter experts but also skilled educators
-                who know how to adapt their teaching methods to fit each student's unique
-                learning style. We believe that with the right guidance, every student has
-                the potential to excel academically.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 justify-items-center sm:justify-items-start text-center sm:text-left">
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-    className="flex items-center gap-3 max-w-xs"
-  >
-    <BookOpen className="text-blue-600 h-8 w-8" />
-    <div>
-      <div className="font-semibold text-gray-900">Certified Teachers</div>
-      <div className="text-gray-500 text-sm">Experienced educators</div>
-    </div>
-  </motion.div>
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32">
+            {globeConfig && (
+              <Globe className="w-full h-full" config={globeConfig} />
+            )}
+          </ScrollReveal>
 
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-    className="flex items-center gap-3 max-w-xs"
-  >
-    <GraduationCap className="text-orange-500 h-8 w-8" />
-    <div>
-      <div className="font-semibold text-gray-900">IIT Mentors</div>
-      <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
-    </div>
-  </motion.div>
+          <ScrollReveal className="lg:w-1/2" delay={0.2} direction="right">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+              About Eleveta
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Founded with a clear mission: to empower students to achieve their academic goals
+              through personalized, high-quality tutoring...
+            </p>
+            <p className="text-gray-600 mb-6">
+              Our tutors are not only subject matter experts but also skilled educators who know how
+              to adapt their teaching methods to fit each student's unique learning style...
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 justify-items-center sm:justify-items-start text-center sm:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="flex items-center gap-3 max-w-xs"
+              >
+                <BookOpen className="text-blue-600 h-8 w-8" />
+                <div>
+                  <div className="font-semibold text-gray-900">Certified Teachers</div>
+                  <div className="text-gray-500 text-sm">Experienced educators</div>
+                </div>
+              </motion.div>
 
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-    className="flex items-center gap-3 max-w-xs"
-  >
-    <Clock className="text-purple-500 h-8 w-8" />
-    <div>
-      <div className="font-semibold text-gray-900">Proven Methodology</div>
-      <div className="text-gray-500 text-sm">Recognized excellence</div>
-    </div>
-  </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="flex items-center gap-3 max-w-xs"
+              >
+                <GraduationCap className="text-orange-500 h-8 w-8" />
+                <div>
+                  <div className="font-semibold text-gray-900">IIT Mentors</div>
+                  <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
+                </div>
+              </motion.div>
 
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-    className="flex items-center gap-3 max-w-xs"
-  >
-    <Award className="text-green-600 h-8 w-8" />
-    <div>
-      <div className="font-semibold text-gray-900">Award-Winning</div>
-      <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
-    </div>
-  </motion.div>
-</div>
-</ScrollReveal>
-          </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="flex items-center gap-3 max-w-xs"
+              >
+                <Clock className="text-purple-500 h-8 w-8" />
+                <div>
+                  <div className="font-semibold text-gray-900">Proven Methodology</div>
+                  <div className="text-gray-500 text-sm">Recognized excellence</div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="flex items-center gap-3 max-w-xs"
+              >
+                <Award className="text-green-600 h-8 w-8" />
+                <div>
+                  <div className="font-semibold text-gray-900">Award-Winning</div>
+                  <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
+                </div>
+              </motion.div>
+            </div>
+          </ScrollReveal>
         </div>
-      </section>
-
+      </div>
+    </section>
       {/* Services Section */}
       <section id="services" className="py-20 bg-gray-50 border-t border-gray-100">
         <div className="container mx-auto px-4">
@@ -821,11 +826,11 @@ const demoForm = useRef<HTMLFormElement>(null);
                 {/* Educational icons row 2 - middle */}
                 <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full overflow-hidden">
                   <Marquee pauseOnHover reverse className="py-2">
-                    <Globe className="edu-icon h-12 w-12 text-green-500" />
+                    <Award className="edu-icon h-12 w-12 text-green-500" />
                     <Award className="edu-icon h-12 w-12 text-orange-500" />
                     <BookMarked className="edu-icon h-12 w-12 text-blue-500" />
                     <Microscope className="edu-icon h-12 w-12 text-red-500" />
-                    <Globe className="edu-icon h-12 w-12 text-purple-500" />
+                    <Award className="edu-icon h-12 w-12 text-purple-500" />
                     <Award className="edu-icon h-12 w-12 text-yellow-500" />
                   </Marquee>
                 </div>
