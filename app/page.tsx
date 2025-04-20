@@ -413,13 +413,19 @@ const demoForm = useRef<HTMLFormElement>(null);
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="flex items-center">
-<AuroraText 
-  className="block text-3xl font-bold tracking-tight font-poppins" 
-  colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
-  speed={0.5}
->
-  Eleveta
-</AuroraText>
+<a href="#home" onClick={(e) => {
+  e.preventDefault();
+  document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+}}>
+  <AuroraText 
+    className="block text-3xl font-bold tracking-tight font-poppins cursor-pointer" 
+    colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
+    speed={0.5}
+  >
+    Eleveta
+  </AuroraText>
+</a>
+
 
 
           </motion.div>
@@ -494,8 +500,8 @@ const demoForm = useRef<HTMLFormElement>(null);
         )}
       </header>
 
-      {/* ddivn */}
-      <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/70 to-gray-50">
+      {/* Hero Section */}
+      <section id="home" className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/70 to-gray-50">
         {/* Glow effect */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full md:w-3/4 md:h-3/4 rounded-full bg-blue-500/5 blur-3xl"></div>
@@ -567,83 +573,79 @@ const demoForm = useRef<HTMLFormElement>(null);
       
       {/* About Section */}
       <section id="about" className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <ScrollReveal className="lg:w-[800px] w-full h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-110 sm:-mt-20 md:-mt-24 lg:-mt-32">
-            {globeConfig && (
-              <Globe className="w-full h-full" config={globeConfig} />
-            )}
-          </ScrollReveal>
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col lg:flex-row items-center gap-12">
+      
+      {/* Globe Section */}
+      <ScrollReveal className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:w-[800px] lg:h-[800px] relative rounded-xl shadow-none bg-transparent overflow-visible mx-auto -mt-10 sm:-mt-20 md:-mt-24 lg:-mt-32 flex justify-center items-center">
+        {globeConfig && (
+          <Globe
+            className="w-full h-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-full"
+            config={globeConfig}
+          />
+        )}
+      </ScrollReveal>
 
-          <ScrollReveal className="lg:w-1/2" delay={0.2} direction="right">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-              About Eleveta
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Founded with a clear mission: to empower students to achieve their academic goals
-              through personalized, high-quality tutoring...
-            </p>
-            <p className="text-gray-600 mb-6">
-              Our tutors are not only subject matter experts but also skilled educators who know how
-              to adapt their teaching methods to fit each student's unique learning style...
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8 justify-items-center sm:justify-items-start text-center sm:text-left">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="flex items-center gap-3 max-w-xs"
-              >
-                <BookOpen className="text-blue-600 h-8 w-8" />
-                <div>
-                  <div className="font-semibold text-gray-900">Certified Teachers</div>
-                  <div className="text-gray-500 text-sm">Experienced educators</div>
-                </div>
-              </motion.div>
+      {/* Text and Features Section */}
+      <ScrollReveal className="lg:w-1/2 w-full text-center sm:text-left" delay={0.2} direction="right">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 text-center sm:text-left">
+          About Eleveta
+        </h2>
+        <p className="text-gray-600 mb-6 text-center sm:text-left">
+          Founded with a clear mission: to empower students to achieve their academic goals through personalized, high-quality tutoring. Our instructors are experienced educators and subject matter experts, many from India's premier IITs, skilled in adapting their teaching to each student's unique learning style. We believe that with the right guidance from top minds, every student can excel.
+        </p>
+        <p className="text-gray-600 mb-6 text-center sm:text-left">
+          Our tutors are not only subject matter experts but also skilled educators who know how to adapt their teaching methods to fit each student's unique learning style. We believe that with the right guidance, every student has the potential to excel academically.
+        </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="flex items-center gap-3 max-w-xs"
-              >
-                <GraduationCap className="text-orange-500 h-8 w-8" />
-                <div>
-                  <div className="font-semibold text-gray-900">IIT Mentors</div>
-                  <div className="text-gray-500 text-sm">Deep Subject Knowledge</div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="flex items-center gap-3 max-w-xs"
-              >
-                <Clock className="text-purple-500 h-8 w-8" />
-                <div>
-                  <div className="font-semibold text-gray-900">Proven Methodology</div>
-                  <div className="text-gray-500 text-sm">Recognized excellence</div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="flex items-center gap-3 max-w-xs"
-              >
-                <Award className="text-green-600 h-8 w-8" />
-                <div>
-                  <div className="font-semibold text-gray-900">Award-Winning</div>
-                  <div className="text-gray-500 text-sm">Effective Teaching Strategies</div>
-                </div>
-              </motion.div>
-            </div>
-          </ScrollReveal>
+        {/* Feature Grid */}
+        <div className="flex justify-center">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
+    {[
+      {
+        icon: <BookOpen className="text-blue-600 h-8 w-8" />,
+        title: "Certified Teachers",
+        subtitle: "Experienced educators",
+      },
+      {
+        icon: <GraduationCap className="text-orange-500 h-8 w-8" />,
+        title: "IIT Mentors",
+        subtitle: "Deep Subject Knowledge",
+      },
+      {
+        icon: <Clock className="text-purple-500 h-8 w-8" />,
+        title: "Proven Methodology",
+        subtitle: "Recognized excellence",
+      },
+      {
+        icon: <Award className="text-green-600 h-8 w-8" />,
+        title: "Award-Winning",
+        subtitle: "Effective Teaching",
+      },
+    ].map(({ icon, title, subtitle }, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ y: -5, transition: { duration: 0.2 } }}
+        className="w-[200px] sm:w-full"
+      >
+        <div className="flex items-start gap-3 text-left">
+          <div className="mt-1">{icon}</div>
+          <div>
+            <div className="font-semibold text-gray-900">{title}</div>
+            <div className="text-gray-500 text-sm">{subtitle}</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+          ))}
+        </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+</section>
+
       {/* Services Section */}
       <section id="services" className="py-20 bg-gray-50 border-t border-gray-100">
         <div className="container mx-auto px-4">
@@ -1085,40 +1087,29 @@ const demoForm = useRef<HTMLFormElement>(null);
         </motion.div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-10 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <AuroraText 
-  className="block text-3xl font-bold tracking-tight font-poppins" 
-  colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
-  speed={0.5}
->
-  Eleveta
-</AuroraText>
-            
-            <div className="flex space-x-8">
-              
-              <a href="#about" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">About Us</a>
-              <a href="#services" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#features" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Why Choose Us</a>
-              <a href="#testimonials" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Testimonials</a>
-              <a href="#contact" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
-            </div>
-            
-            {/* <div className="flex space-x-4 mt-4 md:mt-0">
-              {['twitter', 'facebook', 'instagram', 'linkedin'].map((social) => (
-                <a 
-                  key={social} 
-                  href={`#${social}`} 
-                  className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                >
-                  <span className="sr-only">{social}</span>
-                </a>
-              ))}
-            </div> */}
-          </div>
-          
+{/* Footer */}
+<footer className="py-10 bg-white border-t border-gray-100">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-0 text-center md:text-left">
+      
+      {/* Logo */}
+      <AuroraText 
+        className="block text-3xl font-bold tracking-tight font-poppins mx-auto md:mx-0" 
+        colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
+        speed={0.5}
+      >
+        Eleveta
+      </AuroraText>
+
+      {/* Navigation Links */}
+      <div className="flex flex-col md:flex-row md:space-x-8 space-y-2 md:space-y-0 items-center">
+        <a href="#about" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">About Us</a>
+        <a href="#services" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Services</a>
+        <a href="#features" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Why Choose Us</a>
+        <a href="#testimonials" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Testimonials</a>
+        <a href="#contact" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+      </div>
+    </div>    
           <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm">
               © 2025 Eleveta. All rights reserved.
