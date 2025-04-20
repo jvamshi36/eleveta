@@ -575,10 +575,11 @@ const demoForm = useRef<HTMLFormElement>(null);
       </section>
       
      {/* About Section */}
+{/* About Section */}
 <section id="about" className="py-12 md:py-16 lg:py-20 bg-white overflow-hidden">
   <div className="container mx-auto px-4">
     <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-      {/* Globe Section - Always First on Mobile */}
+      {/* Globe Section - With proper container and centering */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -586,12 +587,22 @@ const demoForm = useRef<HTMLFormElement>(null);
         viewport={{ once: true }}
         className="w-full lg:w-1/2 order-1 lg:order-1"
       >
-        <ScrollReveal className="w-full relative flex justify-center lg:justify-start items-center">
-          <div className="h-[280px] xs:h-[320px] sm:h-[380px] md:h-[450px] lg:h-[580px] w-full max-w-full lg:max-w-[90%] xl:max-w-[85%] lg:-mt-8">
+        <ScrollReveal className="w-full relative flex justify-center items-center">
+          <div className="h-[350px] xs:h-[370px] sm:h-[400px] md:h-[450px] lg:h-[580px] w-full aspect-square max-w-[350px] xs:max-w-[370px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[580px] mx-auto">
             {globeConfig && (
               <Globe
                 className="w-full h-full"
-                config={globeConfig}
+                config={{
+                  ...globeConfig,
+                  renderOptions: {
+                    ...globeConfig.renderOptions,
+                    // Ensure globe is fully visible
+                    width: '100%',
+                    height: '100%',
+                    preserveDrawingBuffer: true,
+                    antialias: true
+                  }
+                }}
               />
             )}
           </div>
