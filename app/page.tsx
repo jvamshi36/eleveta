@@ -11,7 +11,10 @@ import {
   Microscope, 
   Ruler, 
   Lightbulb, 
-  Palette 
+  Palette, 
+  Phone, 
+  MapPin, 
+  Mail
 } from 'lucide-react';
 import { motion, useScroll, useInView } from "framer-motion";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
@@ -1088,46 +1091,52 @@ const demoForm = useRef<HTMLFormElement>(null);
       </section>
 
 {/* Footer */}
-<footer className="py-10 bg-white border-t border-gray-100">
-  <div className="container mx-auto px-4">
-    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-0 text-center md:text-left">
-      
-      {/* Logo */}
-      <AuroraText 
-        className="block text-3xl font-bold tracking-tight font-poppins mx-auto md:mx-0" 
-        colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
-        speed={0.5}
-      >
-        Eleveta
-      </AuroraText>
-
-      {/* Navigation Links */}
-      <div className="flex flex-col md:flex-row md:space-x-8 space-y-2 md:space-y-0 items-center">
-        <a href="#about" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">About Us</a>
-        <a href="#services" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Services</a>
-        <a href="#features" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Why Choose Us</a>
-        <a href="#testimonials" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Testimonials</a>
-        <a href="#contact" className="text-sm text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+<footer className="py-12 bg-gradient-to-b from-white to-blue-50">
+  <div className="container mx-auto px-4 max-w-6xl">
+    {/* Main Footer Content */}
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
+      {/* Company Info */}
+      <div className="md:col-span-3 flex justify-center md:justify-start">
+        <AuroraText 
+          className="text-3xl font-bold tracking-tight font-sans" 
+          colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
+          speed={0.5}
+        >
+          Eleveta
+        </AuroraText>
       </div>
-    </div>    
-          <div className="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm">
-              © 2025 Eleveta. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#terms" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
-                Terms
-              </a>
-              <a href="#privacy" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
-                Privacy
-              </a>
-              <a href="#cookies" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
-                Cookies
-              </a>
-            </div>
-          </div>
+      
+      {/* Quick Links */}
+      <div className="md:col-span-9 flex justify-center md:justify-end items-center">
+        <div className="flex flex-wrap md:flex-nowrap gap-x-6 gap-y-1 justify-center md:justify-end">
+          <a href="#about" className="text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">About Us</a>
+          <a href="#services" className="text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Services</a>
+          <a href="#features" className="text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Why Choose Us</a>
+          <a href="#testimonials" className="text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Testimonials</a>
+          <a href="#contact" className="text-gray-600 hover:text-blue-600 hover:translate-x-1 transition-all">Contact</a>
         </div>
-      </footer>
+      </div>
+    </div>
+    
+    {/* Footer Bottom */}
+    <div className="pt-1 flex flex-col md:flex-row justify-between items-center">
+      <p className="text-gray-500 text-sm mb-1 md:mb-0">
+        © 2025 Eleveta. All rights reserved.
+      </p>
+      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        <a href="#terms" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
+          Terms of Service
+        </a>
+        <a href="#privacy" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
+          Privacy Policy
+        </a>
+        <a href="#cookies" className="text-sm text-gray-500 hover:text-blue-600 transition-colors">
+          Cookie Policy
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
       {showSnackbar && (
         <div className="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-[9999] animate-in fade-in slide-in-from-bottom-4">
           {snackbarMessage}
