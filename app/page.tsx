@@ -574,55 +574,81 @@ const demoForm = useRef<HTMLFormElement>(null);
         </div>
       </section>
       
-      {/* About Section */}
-      <section id="about" className="py-16 bg-white">
+     {/* About Section */}
+<section id="about" className="py-12 md:py-16 lg:py-20 bg-white overflow-hidden">
   <div className="container mx-auto px-4">
-    <div className="flex flex-col lg:flex-row items-center gap-12">
-      {/* Globe Section */}
-      <div className="lg:w-1/2 w-full">
-        <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px] relative rounded-xl bg-transparent overflow-visible flex justify-center items-center">
-          {globeConfig && (
-            <Globe
-              className="w-full h-full max-w-[320px] sm:max-w-[400px] md:max-w-[600px] lg:max-w-[800px] mx-auto"
-              config={globeConfig}
-            />
-          )}
-        </div>
-      </div>
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+      {/* Globe Section - Always First on Mobile */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="w-full lg:w-1/2 order-1 lg:order-1"
+      >
+        <ScrollReveal className="w-full relative flex justify-center lg:justify-start items-center">
+          <div className="h-[280px] xs:h-[320px] sm:h-[380px] md:h-[450px] lg:h-[580px] w-full max-w-full lg:max-w-[90%] xl:max-w-[85%] lg:-mt-8">
+            {globeConfig && (
+              <Globe
+                className="w-full h-full"
+                config={globeConfig}
+              />
+            )}
+          </div>
+        </ScrollReveal>
+      </motion.div>
 
-      {/* Text and Features Section */}
-      <div className="lg:w-1/2 w-full">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 text-center lg:text-left">
+      {/* Text Section - Always Second on Mobile */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="w-full lg:w-1/2 order-2 lg:order-2"
+      >
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-gray-900 text-center lg:text-left">
           About Eleveta
         </h2>
-        <p className="text-gray-600 mb-6 text-center lg:text-left">
-          Founded with a clear mission: to empower students to achieve their academic goals through personalized, high-quality tutoring. Our instructors are experienced educators and subject matter experts, many from India's premier IITs, skilled in adapting their teaching to each student's unique learning style. We believe that with the right guidance from top minds, every student can excel.
-        </p>
-        <p className="text-gray-600 mb-6 text-center lg:text-left">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-gray-600 mb-4 md:mb-6 text-center lg:text-left"
+        >
+          Founded with a clear mission: to empower students to achieve their academic goals through personalized, high-quality tutoring. Our instructors are experienced educators and subject matter experts, many from India's premier IITs, skilled in adapting their teaching to each student's unique learning style.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-gray-600 mb-4 md:mb-6 text-center lg:text-left"
+        >
           Our tutors are not only subject matter experts but also skilled educators who know how to adapt their teaching methods to fit each student's unique learning style. We believe that with the right guidance, every student has the potential to excel academically.
-        </p>
+        </motion.p>
         
         {/* Feature Grid */}
-        <div className="mt-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="mt-6 md:mt-8">
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
             {[
               {
-                icon: <BookOpen className="text-blue-600 h-8 w-8" />,
+                icon: <BookOpen className="text-blue-600 h-6 w-6 md:h-8 md:w-8" />,
                 title: "Certified Teachers",
                 subtitle: "Experienced educators",
               },
               {
-                icon: <GraduationCap className="text-orange-500 h-8 w-8" />,
+                icon: <GraduationCap className="text-orange-500 h-6 w-6 md:h-8 md:w-8" />,
                 title: "IIT Mentors",
                 subtitle: "Deep Subject Knowledge",
               },
               {
-                icon: <Clock className="text-purple-500 h-8 w-8" />,
+                icon: <Clock className="text-purple-500 h-6 w-6 md:h-8 md:w-8" />,
                 title: "Proven Methodology",
                 subtitle: "Recognized excellence",
               },
               {
-                icon: <Award className="text-green-600 h-8 w-8" />,
+                icon: <Award className="text-green-600 h-6 w-6 md:h-8 md:w-8" />,
                 title: "Award-Winning",
                 subtitle: "Effective Teaching",
               },
@@ -630,20 +656,22 @@ const demoForm = useRef<HTMLFormElement>(null);
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="flex items-start gap-3"
+                className="flex flex-col items-center lg:items-start text-center lg:text-left p-2 md:p-3 rounded-lg hover:bg-gray-50"
               >
-                <div className="mt-1 flex-shrink-0">{icon}</div>
+                <div className="mb-1 md:mb-2">{icon}</div>
                 <div>
-                  <div className="font-semibold text-gray-900">{title}</div>
-                  <div className="text-gray-500 text-sm">{subtitle}</div>
+                  <div className="font-semibold text-gray-900 text-sm md:text-base">{title}</div>
+                  <div className="text-gray-500 text-xs md:text-sm">{subtitle}</div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   </div>
 </section>
