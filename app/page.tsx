@@ -451,31 +451,42 @@ const demoForm = useRef<HTMLFormElement>(null);
     const [globeConfig, setGlobeConfig] = useState<any>(null);
   
     useEffect(() => {
-      const isMobile = window.innerWidth < 768;
-  
-      setGlobeConfig({
-        width: isMobile ? 400 : 800,
-        height: isMobile ? 400 : 800,
-        devicePixelRatio: isMobile ? 1 : 2,
-        phi: 0,
-        theta: 0.3,
-        dark: 0,
-        diffuse: 0.4,
-        mapSamples: isMobile ? 8000 : 16000,
-        mapBrightness: 1.2,
-        baseColor: [1, 1, 1],
-        markerColor: [59 / 255, 130 / 255, 246 / 255],
-        glowColor: [1, 1, 1],
-        markers: [
-          { location: [40.7128, -74.006], size: 0.1 },
-          { location: [34.0522, -118.2437], size: 0.1 },
-          { location: [51.5074, -0.1278], size: 0.1 },
-          { location: [48.8566, 2.3522], size: 0.1 },
-          { location: [35.6762, 139.6503], size: 0.1 },
-        ],
-      });
+      const handleResize = () => {
+        const isMobile = window.innerWidth < 768;
+    
+        setGlobeConfig({
+          width: isMobile ? 300 : 800,  // Smaller width for mobile
+          height: isMobile ? 300 : 800, // Smaller height for mobile
+          devicePixelRatio: isMobile ? 1 : 2,
+          phi: 0,
+          theta: 0.3,
+          dark: 0,
+          diffuse: 0.4,
+          mapSamples: isMobile ? 6000 : 16000, // Reduced samples for mobile
+          mapBrightness: 1.2,
+          baseColor: [1, 1, 1],
+          markerColor: [59 / 255, 130 / 255, 246 / 255],
+          glowColor: [1, 1, 1],
+          markers: [
+            { location: [40.7128, -74.006], size: 0.1 },
+            { location: [34.0522, -118.2437], size: 0.1 },
+            { location: [51.5074, -0.1278], size: 0.1 },
+            { location: [48.8566, 2.3522], size: 0.1 },
+            { location: [35.6762, 139.6503], size: 0.1 },
+          ],
+        });
+      };
+      handleResize();
+
+      // Add resize listener
+      window.addEventListener('resize', handleResize);
+    
+      // Cleanup
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }, []);
-  
+
     const [flippedStates, setFlippedStates] = useState(services.map(() => false));
 
     const handleFlip = (index: number) => {
@@ -483,6 +494,11 @@ const demoForm = useRef<HTMLFormElement>(null);
         prev.map((val, i) => (i === index ? !val : val))
       );
     };
+
+    const closeMobileMenu = () => {
+      setMobileMenuOpen(false);
+    };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
   {/* Navigation */}
@@ -561,11 +577,11 @@ const demoForm = useRef<HTMLFormElement>(null);
           transition={{ duration: 0.2 }}
           className="md:hidden py-4 px-4 bg-white/50 backdrop-blur-xl border-t border-gray-200/30 shadow-sm"
         > <nav className="flex flex-col space-y-4">
-              <a href="#about" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">About Us</a>
-              <a href="#services" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#features" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Why Choose Us</a>
-              <a href="#testimonials" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Testimonials</a>
-              <a href="#contact" className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
+              <a href="#about" onClick={closeMobileMenu}  className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">About Us</a>
+              <a href="#services" onClick={closeMobileMenu} className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Services</a>
+              <a href="#features" onClick={closeMobileMenu} className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Why Choose Us</a>
+              <a href="#testimonials"onClick={closeMobileMenu}  className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Testimonials</a>
+              <a href="#contact" onClick={closeMobileMenu} className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
               <div className="flex space-x-4 pt-2">
                 <RainbowButton 
                   className="flex-1 text-white bg-blue-600/70 backdrop-blur-sm shadow-md"
@@ -622,7 +638,8 @@ const demoForm = useRef<HTMLFormElement>(null);
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-4xl mx-auto text-center mb-16"
           >
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
+             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
+             {/* Existing content */}
               <AuroraText 
                 className="block" 
                 colors={["#1E40AF", "#3B82F6", "#60A5FA"]}
