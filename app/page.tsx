@@ -313,18 +313,94 @@ const demoForm = useRef<HTMLFormElement>(null);
     {
       title: "Mathematics",
       icon: <Sigma className="mb-4 text-indigo-600 w-12 h-12" />,
+      moreDetails: (
+      <>
+        <p className="font-medium text-blue-700">
+          We offer complete math support across international curricula and competitions:
+        </p>
+        <ul className="list-disc list-inside space-y-1 mt-2">
+          <li>
+            <strong>IBDP:</strong> Full coverage of AA & AI (SL & HL), with tailored IA and EE guidance
+          </li>
+          <li>
+            <strong>MYP & PYP:</strong> Foundation-building through inquiry-based and skill-enhancing modules
+          </li>
+          <li>
+            <strong>AP Math:</strong> AP Calculus AB/BC, AP Statistics with practice exams and FRQ analysis
+          </li>
+          <li>
+            <strong>Competitive Exams:</strong> AMC 8, AMC 10, AMC 12, Pascal, Cayley, Fermat math contests
+          </li>
+          <li>
+            <strong>Olympiads:</strong> Regional and national Olympiad training – RMO, INMO, IMO
+          </li>
+          <li>
+            <strong>SAT Math:</strong> Concept + application coaching aligned with the new Digital SAT
+          </li>
+          <li>
+            <strong>Enrichment:</strong> Logical reasoning, math projects, and contest math for gifted learners
+          </li>
+        </ul>
+      </>
+    ),
       description: "From basic arithmetic to advanced calculus, our math tutoring helps students build strong foundations and tackle complex problems.",
       levels: "Elementary to University"
     },
     {
       title: "Sciences",
       icon:<Atom className="mb-4 text-emerald-500 w-12 h-12" />,
+      moreDetails: (<>
+      <p className="font-medium text-blue-700">
+      Our science tutoring integrates conceptual clarity with experimental thinking:
+      </p>
+      <ul className="list-disc list-inside space-y-1 mt-2">
+        <li>
+          <strong>IBDP:</strong> Full coverage of AA & AI (SL & HL), with tailored IA and EE guidance
+        </li>
+        <li>
+          <strong>MYP & PYP:</strong> Science coaching focused on observation, reasoning, and practical understanding
+        </li>
+        <li>
+          <strong>AP Sciences:</strong>  AP Physics 1/2/C, AP Chemistry – full syllabus + exam training
+        </li>
+        <li>
+          <strong>Olympiads:</strong> Regional and national Olympiad training – NSEJS, NSEP, NSEC, INPhO, INChO, IPhO, IChO 
+        </li>
+        <li>
+          <strong>Project Assistance:</strong> Support with lab work, science fairs, and research papers
+        </li>
+      </ul>
+    </>
+  ),
       description: "Comprehensive tutoring in biology, chemistry, physics, and environmental science with hands-on approaches to complex scientific concepts.",
       levels: "Middle School to University"
     },
     {
       title: "Test Preparation",
       icon: <FileCheck className="mb-4 text-yellow-500 w-12 h-12" />,
+      moreDetails: (<>
+        <p className="font-medium text-blue-700">
+        Our science tutoring integrates conceptual clarity with experimental thinking:
+        </p>
+        <ul className="list-disc list-inside space-y-1 mt-2">
+          <li>
+            <strong>SAT & PSAT/NMSQT:</strong> Full coaching for math, problem-solving, and timing strategy
+          </li>
+          <li>
+            <strong>Math Contests:</strong> AMC series, CEMC (Pascal, Cayley, Fermat), Euclid, AIME, ARML
+          </li>
+          <li>
+            <strong>Science Olympiads:</strong> Subject-wise prep for national and international levels
+          </li>
+          <li>
+            <strong>High-Order Thinking:</strong> Training in abstraction, modeling, and pattern recognition
+          </li>
+          <li>
+            <strong>Academic Enrichment:</strong> Stretch programs for high-performing and curious students
+          </li>
+        </ul>
+      </>
+    ),
       description: "Specialized coaching for SAT, ACT, AP exams, and more, including practice tests, strategies, and personalized study plans.",
       result: "Higher Scores Guaranteed"
     }
@@ -400,6 +476,13 @@ const demoForm = useRef<HTMLFormElement>(null);
       });
     }, []);
   
+    const [flippedStates, setFlippedStates] = useState(services.map(() => false));
+
+    const handleFlip = (index: number) => {
+      setFlippedStates((prev) =>
+        prev.map((val, i) => (i === index ? !val : val))
+      );
+    };
   return (
     <div className="min-h-screen bg-white text-gray-900">
   {/* Navigation */}
@@ -686,65 +769,93 @@ const demoForm = useRef<HTMLFormElement>(null);
     </div>
   </div>
 </section>
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50 border-t border-gray-100">
-        <div className="container mx-auto px-4">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Our Tutoring Services</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                We offer comprehensive tutoring services across various subjects and academic levels,
-                tailored to meet the unique needs of each student.
-              </p>
-            </div>
-          </ScrollReveal>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, staggerChildren: 0.2 }}
-            className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <ScrollReveal key={index} delay={index * 0.1} direction={index % 2 === 0 ? "up" : "down"}>
-                <Card className="relative w-full overflow-hidden bg-white border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all">
-                  <BorderBeam
-                    duration={10}
-                    size={400}
-                    className="from-transparent via-red-500 to-transparent"
-                  />
-                  <BorderBeam
-                    duration={10}
-                    delay={5}
-                    size={400}
-                    className="from-transparent via-blue-500 to-transparent"
-                  />
-                  <CardHeader className="pb-4">
-                    <div className="mb-4 flex justify-center">
-                      {service.icon}
-                    </div>
-                    <CardTitle className="text-2xl font-bold text-gray-900 text-center">{service.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4 text-center">
-                      {service.description}
-                    </p>
-                    <div className="flex justify-center mt-6">
-                      <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-600">
-                        {service.levels || service.result}
-                      </Badge>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="pt-0 flex justify-center">
-                    <Button variant="link" className="text-blue-600 hover:text-blue-700 px-6 py-2.5 min-h-[48px]">
-                      Learn More <ChevronRight size={16} className="ml-1" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </ScrollReveal>
-            ))}
-          </motion.div>
+<section id="services" className="py-20 bg-gray-50 border-t border-gray-100">
+  <div className="container mx-auto px-4">
+    <ScrollReveal>
+      <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+          Our Tutoring Services
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          We offer comprehensive tutoring services across various subjects and academic levels, tailored to meet the unique needs of each student.
+        </p>
+      </div>
+    </ScrollReveal>
+
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, staggerChildren: 0.2 }}
+      className="grid md:grid-cols-3 gap-8"
+    >
+      {services.map((service, index: number) => (
+        <ScrollReveal
+          key={index}
+          delay={index * 0.1}
+          direction={index % 2 === 0 ? "up" : "down"}
+        >
+<div className="relative w-full h-[560px] perspective">
+  <div
+    className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
+      flippedStates[index] ? "rotate-y-180" : ""
+    }`}
+  >
+    {/* Front */}
+    <Card className="absolute w-full h-full backface-hidden bg-white border border-gray-200 shadow-md rounded-lg flex flex-col justify-between">
+      <CardHeader className="pb-4">
+        <div className="mb-4 flex justify-center">{service.icon}</div>
+        <CardTitle className="text-2xl font-bold text-gray-900 text-center">
+          {service.title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-gray-600 mb-4 text-center">{service.description}</p>
+        <div className="flex justify-center mt-6">
+          <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-600">
+            {service.levels || service.result}
+          </Badge>
         </div>
-      </section>
+      </CardContent>
+      <CardFooter className="flex justify-center pt-0">
+        <Button
+          variant="link"
+          className="text-blue-600 hover:text-blue-700 px-6 py-2.5"
+          onClick={() => handleFlip(index)}
+        >
+          Learn More <ChevronRight size={16} className="ml-1" />
+        </Button>
+      </CardFooter>
+    </Card>
+
+    {/* Back */}
+    <Card className="absolute w-full h-full backface-hidden rotate-y-180 bg-gray-50 border border-blue-100 shadow-md rounded-lg flex flex-col justify-between">
+      <CardHeader className="pb-4">
+        <CardTitle className="text-xl font-semibold text-center text-blue-700">
+          More About {service.title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="text-sm text-gray-700 px-6 py-2 space-y-3 text-left">
+        {service.moreDetails || "More information coming soon."}
+      </CardContent>
+      <CardFooter className="flex justify-center pt-4">
+        <Button
+          variant="link"
+          className="text-blue-600 hover:text-blue-700 px-6 py-2.5"
+          onClick={() => handleFlip(index)}
+        >
+          Go Back
+        </Button>
+      </CardFooter>
+    </Card>
+  </div>
+</div>
+
+        </ScrollReveal>
+      ))}
+    </motion.div>
+  </div>
+</section>
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-white relative overflow-hidden">

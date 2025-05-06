@@ -289,3 +289,17 @@
   display: inline-block;
   margin: 0 30px;
 }
+/* Add to your global CSS if not in Tailwind already */
+.perspective {
+  perspective: 1000px;
+}
+.transform-style {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
