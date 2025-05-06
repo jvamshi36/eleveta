@@ -329,13 +329,7 @@ const demoForm = useRef<HTMLFormElement>(null);
             <strong>AP Math:</strong> AP Calculus AB/BC, AP Statistics with practice exams and FRQ analysis
           </li>
           <li>
-            <strong>Competitive Exams:</strong> AMC 8, AMC 10, AMC 12, Pascal, Cayley, Fermat math contests
-          </li>
-          <li>
             <strong>Olympiads:</strong> Regional and national Olympiad training – RMO, INMO, IMO
-          </li>
-          <li>
-            <strong>SAT Math:</strong> Concept + application coaching aligned with the new Digital SAT
           </li>
           <li>
             <strong>Enrichment:</strong> Logical reasoning, math projects, and contest math for gifted learners
