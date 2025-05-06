@@ -795,67 +795,92 @@ const demoForm = useRef<HTMLFormElement>(null);
           delay={index * 0.1}
           direction={index % 2 === 0 ? "up" : "down"}
         >
-<div className="relative w-full h-[560px] perspective">
-  <div
-    className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
-      flippedStates[index] ? "rotate-y-180" : ""
-    }`}
-  >
-    {/* Front */}
-    <Card className="absolute w-full h-full backface-hidden bg-white border border-gray-200 shadow-md rounded-lg flex flex-col justify-between">
-      <CardHeader className="pb-4">
-        <div className="mb-4 flex justify-center">{service.icon}</div>
-        <CardTitle className="text-2xl font-bold text-gray-900 text-center">
-          {service.title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-gray-600 mb-4 text-center">{service.description}</p>
-        <div className="flex justify-center mt-6">
-          <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-600">
-            {service.levels || service.result}
-          </Badge>
-        </div>
-      </CardContent>
-      <CardFooter className="flex justify-center pt-0">
-        <Button
-          variant="link"
-          className="text-blue-600 hover:text-blue-700 px-6 py-2.5"
-          onClick={() => handleFlip(index)}
-        >
-          Learn More <ChevronRight size={16} className="ml-1" />
-        </Button>
-      </CardFooter>
-    </Card>
+          <div className="relative w-full h-[560px] perspective">
+            <div
+              className={`relative w-full h-full transition-transform duration-700 transform-style preserve-3d ${
+                flippedStates[index] ? "rotate-y-180" : ""
+              }`}
+            >
+              {/* Front */}
+              <Card className="absolute w-full h-full backface-hidden bg-white border border-gray-200 shadow-md rounded-lg flex flex-col justify-between overflow-hidden">
+                
+                {/* Animated Beams */}
+                <BorderBeam
+                  duration={10}
+                  size={400}
+                  className="from-transparent via-red-500 to-transparent"
+                />
+                <BorderBeam
+                  duration={10}
+                  delay={5}
+                  size={400}
+                  className="from-transparent via-blue-500 to-transparent"
+                />
 
-    {/* Back */}
-    <Card className="absolute w-full h-full backface-hidden rotate-y-180 bg-gray-50 border border-blue-100 shadow-md rounded-lg flex flex-col justify-between">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-xl font-semibold text-center text-blue-700">
-          More About {service.title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="text-sm text-gray-700 px-6 py-2 space-y-3 text-left">
-        {service.moreDetails || "More information coming soon."}
-      </CardContent>
-      <CardFooter className="flex justify-center pt-4">
-        <Button
-          variant="link"
-          className="text-blue-600 hover:text-blue-700 px-6 py-2.5"
-          onClick={() => handleFlip(index)}
-        >
-          Go Back
-        </Button>
-      </CardFooter>
-    </Card>
-  </div>
-</div>
+                <CardHeader className="pb-4 z-10 relative">
+                  <div className="mb-4 flex justify-center">{service.icon}</div>
+                  <CardTitle className="text-2xl font-bold text-gray-900 text-center">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="z-10 relative">
+                  <p className="text-gray-600 mb-4 text-center">{service.description}</p>
+                  <div className="flex justify-center mt-6">
+                    <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-600">
+                      {service.levels || service.result}
+                    </Badge>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-center pt-0 z-10 relative">
+                  <Button
+                    variant="link"
+                    className="text-blue-600 hover:text-blue-700 px-6 py-2.5"
+                    onClick={() => handleFlip(index)}
+                  >
+                    Learn More <ChevronRight size={16} className="ml-1" />
+                  </Button>
+                </CardFooter>
+              </Card>
 
+              {/* Back */}
+              <Card className="absolute w-full h-full backface-hidden rotate-y-180 bg-gray-50 border border-blue-100 shadow-md rounded-lg flex flex-col justify-between">
+              <BorderBeam
+                  duration={10}
+                  size={400}
+                  className="from-transparent via-red-500 to-transparent"
+                />
+                <BorderBeam
+                  duration={10}
+                  delay={5}
+                  size={400}
+                  className="from-transparent via-blue-500 to-transparent"
+                />
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-xl font-semibold text-center text-blue-700">
+                    More About {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-700 px-6 py-2 space-y-3 text-left leading-relaxed">
+                  {service.moreDetails || "More information coming soon."}
+                </CardContent>
+                <CardFooter className="flex justify-center pt-4">
+                  <Button
+                    variant="link"
+                    className="text-blue-600 hover:text-blue-700 px-6 py-2.5"
+                    onClick={() => handleFlip(index)}
+                  >
+                    Go Back
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </div>
         </ScrollReveal>
       ))}
     </motion.div>
   </div>
 </section>
+
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-white relative overflow-hidden">
